@@ -18,22 +18,17 @@ kotlin {
         }
     }
 
-    val coroutinesVersion = "1.6.0-native-mt"
-    val serializationVersion = "1.3.2"
-    val ktorVersion = "1.6.7"
-    val sqlDelightVersion: String by project
-
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                implementation(Dependencies.Shared.Common.coroutines)
 
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
+                implementation(Dependencies.Shared.Common.serialization)
 
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+                implementation(Dependencies.Shared.Common.ktorCore)
+                implementation(Dependencies.Shared.Common.ktorSerialization)
 
-                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
+                implementation(Dependencies.Shared.Common.sqlDelight)
             }
         }
         val commonTest by getting {
@@ -43,9 +38,8 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-android:$ktorVersion")
-
-                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
+                implementation(Dependencies.Shared.Android.ktor)
+                implementation(Dependencies.Shared.Android.sqlDelight)
             }
         }
         val androidTest by getting
@@ -59,9 +53,8 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
 
             dependencies {
-                implementation("io.ktor:ktor-client-ios:$ktorVersion")
-
-                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
+                implementation(Dependencies.Shared.IOS.ktor)
+                implementation(Dependencies.Shared.IOS.sqlDelight)
             }
         }
         val iosX64Test by getting
@@ -77,11 +70,11 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = AndroidConfigData.compileSdkVersion
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = 21
-        targetSdk = 32
+        minSdk = AndroidConfigData.minSdkVersion
+        targetSdk = AndroidConfigData.targetSdkVersion
     }
 }
 
