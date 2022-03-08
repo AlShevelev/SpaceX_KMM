@@ -25,14 +25,7 @@ object Dependencies {
     }
 
     object Android {
-        const val material = "com.google.android.material:material:1.5.0"
         const val appCompat = "androidx.appcompat:appcompat:1.4.1"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.3"
-        const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
-        const val coreKtx = "androidx.core:core-ktx:1.7.0"
-        const val recyclerView = "androidx.recyclerview:recyclerview:1.2.0"
-        const val cardView = "androidx.cardview:cardview:1.0.0"
 
         const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
 

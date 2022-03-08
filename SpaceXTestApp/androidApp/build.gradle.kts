@@ -43,14 +43,7 @@ android {
 dependencies {
     implementation(project(":shared"))
 
-    implementation(Dependencies.Android.material)
     implementation(Dependencies.Android.appCompat)
-    implementation(Dependencies.Android.constraintLayout)
-    implementation(Dependencies.Android.swipeRefreshLayout)
-    implementation(Dependencies.Android.coroutines)
-    implementation(Dependencies.Android.coreKtx)
-    implementation(Dependencies.Android.recyclerView)
-    implementation(Dependencies.Android.cardView)
 
     implementation(Dependencies.Android.composeUi)
     implementation(Dependencies.Android.composeMaterial)
