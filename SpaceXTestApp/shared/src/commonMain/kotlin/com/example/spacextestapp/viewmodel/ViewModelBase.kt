@@ -1,11 +1,16 @@
-package com.example.spacextestapp.android.mainscreen.viewmodel
+package com.example.spacextestapp.viewmodel
 
-import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
-internal abstract class ViewModelBase<E, S, A> : ViewModel() {
+abstract class ViewModelBase<E, S, A> : Cleanable {
+    protected val viewModelScope by lazy {
+        ViewModelScope(SupervisorJob() + Dispatchers.Main.immediate)
+    }
+
     private val stateFlow =
         MutableSharedFlow<S>(
             replay = 1,
@@ -23,6 +28,10 @@ internal abstract class ViewModelBase<E, S, A> : ViewModel() {
     val action: SharedFlow<A> = actionFlow
 
     abstract fun onEvent(event: E)
+
+    override fun clean() {
+        viewModelScope.close()
+    }
 
     protected open fun setState(state: S) = stateFlow.tryEmit(state)
 

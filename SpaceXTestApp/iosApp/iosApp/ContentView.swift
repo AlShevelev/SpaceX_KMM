@@ -36,26 +36,48 @@ extension ContentView {
         case result([RocketLaunch])
         case error(String)
     }
-    
-    class ViewModel: ObservableObject {
-        let sdk: SpaceXSDK
         
+    class ViewModel: ObservableObject {
+        let sharedViewModel: MainScreenViewModel
+
         @Published var launches = LoadableLaunches.loading
 
-        init(sdk: SpaceXSDK) {
-            self.sdk = sdk
+        init(sharedViewModel: MainScreenViewModel) {
+            self.sharedViewModel = sharedViewModel
+            
             self.loadLaunches(forceReload: false)
         }
 
         func loadLaunches(forceReload: Bool) {
             self.launches = .loading
-            sdk.getLaunches(forceReload: forceReload, completionHandler: { launches, error in
-                if let launches = launches {
-                    self.launches = .result(launches)
-                } else {
-                    self.launches = .error(error?.localizedDescription ?? "error")
+            
+            let collectorInstance = Collector<MainScreenState>(callback: { state in
+                switch state {
+                    case is MainScreenState.Loading:
+                        self.launches = .loading
+                    
+                    case is MainScreenState.Error:
+                        self.launches = .error("")
+
+                    case is MainScreenState.Content:
+                        let content = state as! MainScreenState.Content
+                        self.launches = .result(content.launches)
+                    
+                    default:
+                        print("")
                 }
             })
+            
+            sharedViewModel.state.collect(
+                collector: collectorInstance,
+                completionHandler: { complete, error in
+                    if(error != nil) {
+                        self.launches = .error(error?.localizedDescription ?? "error")
+                    }
+                }
+            )
+                        
+            sharedViewModel.onEvent(event: MainScreenEvent.OnStart())
         }
     }
 }

@@ -8,9 +8,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.example.spacextestapp.android.mainscreen.ui.theme.SpaceXTestAppTheme
-import com.example.spacextestapp.android.mainscreen.viewmodel.MainScreenViewModel
-import com.example.spacextestapp.android.mainscreen.viewmodel.model.MainScreenEvent
-import com.example.spacextestapp.android.mainscreen.viewmodel.model.MainScreenState
+import com.example.spacextestapp.viewmodel.MainScreenViewModel
+import com.example.spacextestapp.viewmodel.model.MainScreenEvent
+import com.example.spacextestapp.viewmodel.model.MainScreenState
 
 @Composable
 internal fun Root(viewModel: MainScreenViewModel) {

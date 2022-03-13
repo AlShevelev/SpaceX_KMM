@@ -1,8 +1,8 @@
-package com.example.spacextestapp.android.mainscreen.viewmodel.model
+package com.example.spacextestapp.viewmodel.model
 
 import com.example.spacextestapp.entity.RocketLaunch
 
-internal sealed class MainScreenState {
+sealed class MainScreenState {
     object Loading : MainScreenState()
 
     object Error : MainScreenState()

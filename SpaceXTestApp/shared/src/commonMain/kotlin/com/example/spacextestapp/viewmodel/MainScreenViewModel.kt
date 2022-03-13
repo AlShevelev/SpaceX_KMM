@@ -1,19 +1,17 @@
-package com.example.spacextestapp.android.mainscreen.viewmodel
+package com.example.spacextestapp.viewmodel
 
-import android.content.Context
-import androidx.lifecycle.viewModelScope
 import com.example.spacextestapp.SpaceXSDK
-import com.example.spacextestapp.android.mainscreen.viewmodel.model.MainScreenAction
-import com.example.spacextestapp.android.mainscreen.viewmodel.model.MainScreenEvent
-import com.example.spacextestapp.android.mainscreen.viewmodel.model.MainScreenState
 import com.example.spacextestapp.cache.DatabaseDriverFactory
+import com.example.spacextestapp.viewmodel.model.MainScreenAction
+import com.example.spacextestapp.viewmodel.model.MainScreenEvent
+import com.example.spacextestapp.viewmodel.model.MainScreenState
 import kotlinx.coroutines.launch
 
-internal class MainScreenViewModel(
-    appContext: Context
+class MainScreenViewModel(
+    databaseDriverFactory: DatabaseDriverFactory
 ) : ViewModelBase<MainScreenEvent, MainScreenState, MainScreenAction>() {
 
-    private val sdk = SpaceXSDK(DatabaseDriverFactory(appContext))
+    private val sdk = SpaceXSDK(databaseDriverFactory)
 
     override fun onEvent(event: MainScreenEvent) {
         when(event) {
