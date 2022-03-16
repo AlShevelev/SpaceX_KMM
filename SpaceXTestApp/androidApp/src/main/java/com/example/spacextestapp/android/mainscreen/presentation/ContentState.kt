@@ -24,7 +24,7 @@ import com.example.spacextestapp.entity.RocketLaunch
 internal fun ContentState(
     modifier: Modifier,
     content: List<RocketLaunch>,
-    onReloadClick: () -> Unit           // FAB
+    onReloadClick: () -> Unit
 ) {
     Scaffold(
         floatingActionButton = {

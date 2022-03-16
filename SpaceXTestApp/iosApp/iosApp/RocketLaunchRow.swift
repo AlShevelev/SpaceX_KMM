@@ -1,6 +1,9 @@
 import SwiftUI
 import shared
 
+/**
+ Represents one row in a list of launches
+ */
 struct RocketLaunchRow: View {
     var rocketLaunch: RocketLaunch
 

@@ -23,7 +23,7 @@ internal fun Root(viewModel: MainScreenViewModel) {
 
             val contentModifier = Modifier.fillMaxSize()
 
-            when(val state = state.value) {
+            when(val stateValue = state.value) {
                 MainScreenState.Loading -> LoadingState(contentModifier)
 
                 MainScreenState.Error -> ErrorState(
@@ -33,7 +33,7 @@ internal fun Root(viewModel: MainScreenViewModel) {
 
                 is MainScreenState.Content -> ContentState(
                     modifier = contentModifier,
-                    content = state.launches,
+                    content = stateValue.launches,
                     onReloadClick = { viewModel.onEvent(MainScreenEvent.OnForceReload) }
                 )
             }

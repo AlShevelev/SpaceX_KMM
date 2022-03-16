@@ -1,14 +1,9 @@
-//
-//  Collector.swift
-//  iosApp
-//
-//  Created by Aleksandr Shevelev on 13.03.2022.
-//  Copyright © 2022 orgName. All rights reserved.
-//
-
 import Foundation
 import shared
 
+/**
+ It's a helper class for collection values from Flow
+ */
 class Collector<T>: Kotlinx_coroutines_coreFlowCollector {
 
     let callback:(T) -> Void

@@ -13,18 +13,26 @@ struct ContentView: View {
                         self.viewModel.loadLaunches(forceReload: true)
                 })
             }
+            .onAppear {
+                viewModel.loadLaunches(forceReload: false)
+            }
+            .onDisappear {
+                viewModel.clean()
+            }
         }
 
         private func listView() -> AnyView {
             switch viewModel.launches {
-            case .loading:
-                return AnyView(Text("Loading...").multilineTextAlignment(.center))
-            case .result(let launches):
-                return AnyView(List(launches) { launch in
-                    RocketLaunchRow(rocketLaunch: launch)
-                })
-            case .error(let description):
-                return AnyView(Text(description).multilineTextAlignment(.center))
+                case .loading:
+                    return AnyView(Text("Loading...").multilineTextAlignment(.center))
+                
+                case .result(let launches):
+                    return AnyView(List(launches) { launch in
+                        RocketLaunchRow(rocketLaunch: launch)
+                    })
+                
+                case .error(let description):
+                    return AnyView(Text(description).multilineTextAlignment(.center))
             }
         }
 }
@@ -44,8 +52,6 @@ extension ContentView {
 
         init(sharedViewModel: MainScreenViewModel) {
             self.sharedViewModel = sharedViewModel
-            
-            self.loadLaunches(forceReload: false)
         }
 
         func loadLaunches(forceReload: Bool) {
@@ -78,6 +84,10 @@ extension ContentView {
             )
                         
             sharedViewModel.onEvent(event: MainScreenEvent.OnStart())
+        }
+        
+        func clean() {
+            sharedViewModel.clean()
         }
     }
 }
