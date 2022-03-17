@@ -4,6 +4,7 @@ This app is a small improvement of Kotlin Multiplatform Mobile [SpaceX demo app]
 The project includes iOS and Android applications with a native UI and a module with shared code.
 
 ## Improvements
-That's what I've done in comparing with the source project:
-* The android app has been transfered to Jetpack Compose;
-* A view model has been moved to the shared module 
+This sample shows next improvements in comparing with the source project:
+* The android app has been transferred from conventional approach to Jetpack Compose;
+* A common view model is shared now across the native applications;
+* The view model has been rewritten to using Kotlin Flow.
